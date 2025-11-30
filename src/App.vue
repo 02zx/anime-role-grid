@@ -101,7 +101,7 @@ async function handleSave() {
       <!-- Hidden Export Grid (Fixed Desktop Size, Proxy URLs) -->
       <!-- Positioned off-screen but rendered -->
       <div 
-        class="fixed top-0 left-[-9999px] pointer-events-none"
+        class="fixed top-0 left-0 pointer-events-none -z-50"
         :style="{ width: `${currentTemplate.cols * 120}px` }"
       >
         <Grid 
