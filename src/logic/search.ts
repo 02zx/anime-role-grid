@@ -22,12 +22,19 @@ export async function useBgmSearch(keyword: string, offset = 0) {
     }
 
     try {
-        const res = await fetch('https://api.bgm.tv/v0/search/characters', {
+        // Use local proxy in production to avoid CORS/GFW issues
+        // Use direct API in dev (unless using wrangler)
+        const apiUrl = import.meta.env.PROD
+            ? '/api/search'
+            : 'https://api.bgm.tv/v0/search/characters'
+
+        const res = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`,
-                'User-Agent': userAgent,
+                // Browser will set its own User-Agent. 
+                // Our proxy will override it with a valid one.
             },
             body: JSON.stringify({
                 keyword,

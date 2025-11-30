@@ -11,7 +11,8 @@ function handleInput(e: Event) {
 </script>
 
 <template>
-  <header class="flex flex-col items-center gap-6 mb-4 md:mb-8 px-4">
+  <header class="flex flex-col items-center gap-4 mb-4 md:mb-8 px-4 pt-8">
+    <img src="/logo.png" alt="Logo" class="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-sm" />
     <div class="relative group max-w-full flex justify-center">
       <input
         :value="name"
