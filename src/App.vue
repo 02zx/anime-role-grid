@@ -72,8 +72,8 @@ async function handleSave() {
     // Force re-render of the export grid to ensure latest data
     exportGridKey.value++
     await nextTick()
-    // Give Vue a moment to mount the new DOM
-    await new Promise(resolve => setTimeout(resolve, 200))
+    // Give Vue a moment to mount the new DOM (increased for mobile stability)
+    await new Promise(resolve => setTimeout(resolve, 800))
 
     await exportGridAsImage('grid-export-target', 'anime-grid')
     showShareModal.value = true

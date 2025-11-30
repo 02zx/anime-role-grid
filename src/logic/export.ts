@@ -30,6 +30,12 @@ export async function exportGridAsImage(elementId: string, fileName: string) {
 
                 // Use proxy to fetch image data
                 let fetchUrl = src
+                // Add timestamp to force fresh fetch (bypass browser cache)
+                if (fetchUrl.includes('?')) {
+                    fetchUrl += `&t=${Date.now()}`
+                } else {
+                    fetchUrl += `?t=${Date.now()}`
+                }
 
                 // Try to fetch with robust settings
                 try {
@@ -86,7 +92,7 @@ export async function exportGridAsImage(elementId: string, fileName: string) {
 
 async function fetchAndConvertToBase64(url: string, img: HTMLImageElement) {
     const response = await fetch(url, {
-        cache: 'default',
+        cache: 'no-cache',
         mode: 'cors',
         credentials: 'omit',
         referrerPolicy: 'no-referrer'
