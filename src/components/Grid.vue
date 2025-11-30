@@ -46,7 +46,7 @@ function getImageUrl(url: string) {
         class="text-3xl font-bold text-center bg-transparent border-b-2 border-transparent hover:border-black focus:border-[#e4007f] focus:outline-none transition-colors px-2 py-1 text-black w-full"
         :class="{ 'pointer-events-none border-none': forExport }"
         style="font-family: 'Noto Serif SC', serif;"
-        placeholder="我的动画喜好表"
+        placeholder="我的动漫人物喜好果然有问题"
         type="text"
         @input="handleTitleInput"
       >
