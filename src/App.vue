@@ -67,7 +67,10 @@ async function handleSave() {
         // Skip if already base64
         if (img.src.startsWith('data:')) return
 
-        const response = await fetch(img.src, { cache: 'force-cache' })
+        // Use wsrv.nl proxy for export to avoid CORS issues
+        const proxyUrl = `https://wsrv.nl/?url=${encodeURIComponent(img.src)}&output=png`
+        
+        const response = await fetch(proxyUrl, { cache: 'force-cache' })
         const blob = await response.blob()
         return new Promise<void>((resolve) => {
           const reader = new FileReader()

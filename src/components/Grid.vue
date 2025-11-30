@@ -15,11 +15,7 @@ function handleSelect(index: number) {
   emit('select-slot', index)
 }
 
-function getProxyUrl(url: string) {
-  if (!url) return ''
-  if (url.startsWith('data:')) return url
-  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&output=png`
-}
+
 </script>
 
 <template>
@@ -52,10 +48,9 @@ function getProxyUrl(url: string) {
         <div class="flex-grow w-full relative overflow-hidden">
           <img 
             v-if="item.character"
-            :src="getProxyUrl(item.character.image)" 
+            :src="item.character.image" 
             class="absolute inset-0 w-full h-full object-cover object-top"
             loading="lazy"
-            crossorigin="anonymous"
           >
           <!-- Empty State Placeholder -->
           <div v-else class="absolute inset-0 bg-white" />

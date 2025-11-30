@@ -81,3 +81,46 @@ git push
 ```
 
 Cloudflare 会自动检测到 GitHub 的变动，并自动为你重新构建和发布新版本。你什么都不用做！
+
+## 常见问题 (Troubleshooting)
+
+### 🔴 报错: `Must specify a project name` 或 `Missing entry-point`
+**原因**：你在 Cloudflare 后台的 "Build command" 里填错了命令。
+**解决方法**：
+1.  进入 Cloudflare Pages 后台 -> Settings -> Builds & deployments。
+2.  点击 "Edit settings"。
+3.  **Build command** 必须填：`npm run build` (千万不要填 `wrangler deploy`！)。
+4.  **Build output directory** 必须填：`dist`。
+5.  保存后，去 "Deployments" 标签页点击 "Retry deployment"。
+
+---
+
+## 方法二：使用命令行直接部署 (CLI)
+
+如果你遇到了 `Missing entry-point` 错误，或者不想使用 GitHub，可以在本地直接部署。
+
+### 1. 构建项目
+
+首先确保你已经生成了最新的 `dist` 目录：
+
+```bash
+npm run build
+```
+
+### 2. 使用 Wrangler 部署
+
+**错误的做法**：直接运行 `npx wrangler deploy` (这会被识别为部署 Worker 代码，导致报错)。
+
+**正确的做法**：使用 Pages 部署命令，并指定输出目录 `dist`：
+
+```bash
+npx wrangler pages deploy dist
+```
+
+### 3. 按照提示操作
+
+1.  它会提示你登录 Cloudflare 账号 (如果未登录)。
+2.  选择 "Create a new project" (如果是第一次)。
+3.  输入项目名称 (例如 `anime-grid`)。
+4.  输入 Production branch (通常填 `master` 或 `main`)。
+5.  等待上传完成，它会给你一个访问链接！
