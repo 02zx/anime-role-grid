@@ -37,16 +37,22 @@ export async function exportGridAsImage(elementId: string, fileName: string) {
                     fetchUrl += `?t=${Date.now()}`
                 }
 
-                // Try to fetch with robust settings
+                // Try to fetch with robust settings and timeout
                 try {
-                    await fetchAndConvertToBase64(fetchUrl, img)
+                    await Promise.race([
+                        fetchAndConvertToBase64(fetchUrl, img),
+                        new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout 5s')), 5000))
+                    ])
                 } catch (e) {
-                    console.warn('Proxy fetch failed, trying fallback:', e)
+                    console.warn(`Proxy fetch failed for ${fetchUrl}:`, e)
                     if (src.includes('wsrv.nl')) {
                         try {
                             const urlParam = new URL(src).searchParams.get('url')
                             if (urlParam) {
-                                await fetchAndConvertToBase64(urlParam, img)
+                                await Promise.race([
+                                    fetchAndConvertToBase64(urlParam, img),
+                                    new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout 5s')), 5000))
+                                ])
                             }
                         } catch (fallbackError) {
                             console.warn('Fallback fetch also failed:', fallbackError)
