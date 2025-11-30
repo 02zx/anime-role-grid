@@ -79,6 +79,7 @@ async function handleSave() {
         id="grid-capture-target"
         :list="list" 
         :cols="currentTemplate.cols"
+        :title="currentTemplate.name"
         @select-slot="handleSelectSlot"
       />
 
@@ -92,6 +93,7 @@ async function handleSave() {
           id="grid-export-target"
           :list="list" 
           :cols="currentTemplate.cols"
+          :title="currentTemplate.name"
           :for-export="true"
         />
       </div>

@@ -5,6 +5,7 @@ import type { GridItem } from '~/types'
 const props = defineProps<{
   list: GridItem[]
   cols?: number
+  title?: string
   forExport?: boolean
 }>()
 
@@ -29,9 +30,18 @@ function getImageUrl(url: string) {
 
 <template>
   <div 
-    class="w-full flex justify-center relative"
+    class="w-full flex flex-col items-center relative"
     :class="{ 'bg-white py-8': forExport }"
   >
+    <!-- Template Title -->
+    <h2 
+      v-if="title"
+      class="text-xl font-bold text-[#e4007f] mb-4 tracking-widest"
+      style="font-family: 'Noto Serif SC', serif;"
+    >
+      — {{ title }} —
+    </h2>
+
     <!-- 
       Responsive Grid:
       - w-full with max-w to ensure it doesn't get too wide on desktop
