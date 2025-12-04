@@ -9,7 +9,7 @@ export const onRequestPost = async (context) => {
         const authHeader = request.headers.get('Authorization');
 
         // Forward to Bangumi
-        const response = await fetch('https://api.bgm.tv/v0/search/characters', {
+        const response = await fetch('https://api.bgm.tv/v0/search/persons', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
