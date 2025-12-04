@@ -46,7 +46,7 @@ export class CanvasGenerator {
         // Use wsrv.nl proxy for CORS support
         // Add cache bust to prevent caching of corrupted images
         // Add n=-1 to disable optimization which might cause issues for some images
-        return `https://wsrv.nl/?url=${encodeURIComponent(url)}&output=png&n=-1&t=${Date.now()}`
+        return `https://wsrv.nl/?${url}`
        // return `https://image.uisdc.cn/?url=${encodeURIComponent(url)}`
        // return `https://cors.bridged.cc/${url}`
       //  return `https://corsproxy.io/?${url}`
