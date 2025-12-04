@@ -9,7 +9,7 @@ console.log('Access Token Present:', !!accessToken)
 
 async function testSearch(keyword: string) {
     try {
-        const res = await fetch('https://api.bgm.tv/v0/search/characters', {
+        const res = await fetch('https://api.bgm.tv/v0/search/persons', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
